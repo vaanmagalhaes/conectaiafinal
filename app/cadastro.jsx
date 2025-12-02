@@ -7,19 +7,17 @@ import {
   StyleSheet, 
   ActivityIndicator, 
   Alert,
-  SafeAreaView, // <--- O VIP QUE ESTAVA FALTANDO. SEM ELE, O APP CRASHA.
+  SafeAreaView,
   KeyboardAvoidingView, 
   Platform,
   ScrollView 
 } from 'react-native';
-import { useRouter } from "expo-router"; // Já adicionei pra você navegar
-
-// --- CONFIGURAÇÃO DA CONEXÃO ---
+import { useRouter } from "expo-router";
 
 const SERVER_HOST = Platform.select({
   android: '10.0.2.2', 
   ios: 'localhost',    
-  default: '192.168.1.115' // Confere seu IP aí
+  default: '192.168.1.115'
 });
 
 const PORT = '4503';
@@ -145,7 +143,6 @@ export default function RegisterScreen() {
           <TouchableOpacity 
             style={styles.button}
             onPress={() => {
-              // Agora volta pro login de verdade em vez de só limpar a tela
               router.back(); 
             }}
           >
@@ -222,7 +219,7 @@ export default function RegisterScreen() {
 
             <TouchableOpacity 
               style={styles.linkButton}
-              onPress={() => router.back()} // Volta pro Login se já tiver conta
+              onPress={() => router.back()}
             >
               <Text style={styles.linkText}>Já possuo uma conta</Text>
             </TouchableOpacity>
