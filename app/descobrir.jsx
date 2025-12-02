@@ -184,7 +184,7 @@ export default function Descobrir() {
   const clearFilters = () => {
     setSelectedCategory(null);
     setSelectedPrice(null);
-    setSearchText(""); // Opcional: limpar busca também? Acho melhor não.
+    setSearchText("");
     router.setParams({ category: null }); // Limpa param da URL
   };
 
