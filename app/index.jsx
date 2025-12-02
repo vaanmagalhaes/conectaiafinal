@@ -14,11 +14,10 @@ import {
   ImageBackground,
   StatusBar
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native'; // <--- O CARA DA NAVEGAÇÃO
+import { useNavigation } from '@react-navigation/native';
 
-// --- LÓGICA DE CONEXÃO ---
 
-const MEU_IP_DA_REDE = '192.168.1.115'; // Confere se seu IP não mudou!
+const MEU_IP_DA_REDE = '192.168.1.115';
 
 const SERVER_HOST = Platform.select({
   ios: 'localhost',
@@ -57,13 +56,12 @@ const apiService = {
 // --- TELA DE LOGIN ---
 
 export default function LoginScreen() {
-  const navigation = useNavigation(); // Hook para navegar
+  const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async () => {
-    // 1. Validação básica
     if (!email || !senha) {
       Alert.alert("Opa!", "Preenche tudo aí, por favor.");
       return;
@@ -72,18 +70,11 @@ export default function LoginScreen() {
     setLoading(true);
 
     try {
-      // 2. Chama o Backend
       const user = await apiService.login({ email, senha });
-
-      // 3. Sucesso!
       console.log("Login autorizado:", user);
-
-      // 4. Navega para a tela 'inicio' e leva o usuário junto
-      // Certifique-se que o nome 'inicio' está registrado no seu App.js/Stack
       navigation.navigate('inicio', { usuario: user });
 
     } catch (err) {
-      // 5. Erro (Senha errada ou servidor fora)
       const msg = err.message.includes("inválidos")
         ? "E-mail ou senha incorretos."
         : "Falha na conexão. O servidor tá on?";
@@ -160,7 +151,6 @@ export default function LoginScreen() {
                 <Text style={styles.linkText}>Criar conta</Text>
               </TouchableOpacity>
 
-              {/* Link para Recuperar Senha */}
               <TouchableOpacity onPress={() => navigation.navigate('recuperarsenha')}>
                 <Text style={styles.linkText}>Esqueci a senha</Text>
               </TouchableOpacity>
@@ -212,8 +202,6 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     marginBottom: 10,
-    // DICA: Se a logo for JPG (fundo branco), tintColor vai pintar o quadrado todo de azul.
-    // Se ficar feio, remova essa linha abaixo.
     tintColor: '#0891B2',
   },
   appName: {
